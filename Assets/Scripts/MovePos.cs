@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class MovePos : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
+    [SerializeField] float speed = 1.0f;
+    [SerializeField] float startPos;
+    [SerializeField] float lastPos;
     void Update()
     {
-        
+        transform.Translate(-1 * speed * Time.deltaTime,0 ,0);
+
+        if(transform.position.x <= lastPos)
+        {
+            transform.Translate(-1 * (lastPos - startPos),0 ,0);
+            SendMessage("ChangePosition", SendMessageOptions.DontRequireReceiver);
+        }
     }
 }
